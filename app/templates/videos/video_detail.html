@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ video.title }}</h1>
+    <p><small>Published on: {{ video.published_at.strftime('%Y-%m-%d') }}</small></p>
+
+    <div style="padding:56.25% 0 0 0;position:relative;">
+        <iframe
+            src="https://player.vimeo.com/video/{{ video.vimeo_id }}?h={{ video.vimeo_hash }}"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <script src="https://player.vimeo.com/api/player.js"></script>
+
+    <hr>
+    <h2>Description</h2>
+    <p>{{ video.description or 'No description available.' }}</p>
+{% endblock %}

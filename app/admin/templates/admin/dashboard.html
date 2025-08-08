@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Admin Dashboard</h1>
+
+    <h2>Videos</h2>
+    <a href="{{ url_for('admin.add_video') }}">Add New Video</a>
+    <ul>
+        {% for video in videos %}
+            <li>
+                {{ video.title }}
+                (<a href="{{ url_for('admin.edit_video', video_id=video.id) }}">Edit</a>)
+            </li>
+        {% else %}
+            <li>No videos found.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <h2>Users</h2>
+    <ul>
+        {% for user in users %}
+            <li>
+                {{ user.name }} ({{ user.email }})
+                {% if user.is_admin %}<strong>- Admin</strong>{% endif %}
+            </li>
+        {% else %}
+            <li>No users found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

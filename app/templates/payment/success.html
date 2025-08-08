@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Payment Successful!</h1>
+    <p>Thank you for subscribing. Your account is now active.</p>
+    <p>We are processing your subscription and you will have access to all videos shortly.</p>
+    <p><a href="{{ url_for('main.index') }}">Go to Homepage</a></p>
+{% endblock %}

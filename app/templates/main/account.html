@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>My Account</h1>
+    <p><strong>Name:</strong> {{ current_user.name }}</p>
+    <p><strong>Email:</strong> {{ current_user.email }}</p>
+
+    <hr>
+
+    <h2>Subscription</h2>
+    {% if current_user.has_active_subscription() %}
+        <p>Your subscription is currently <strong>active</strong>.</p>
+        <p>
+            <a href="{{ url_for('payment.customer_portal') }}">Manage Subscription</a>
+            (Update payment method, view invoices, or cancel)
+        </p>
+    {% else %}
+        <p>You do not have an active subscription.</p>
+        <p><a href="{{ url_for('payment.subscribe') }}">Subscribe Now</a> to get access to all videos.</p>
+    {% endif %}
+{% endblock %}

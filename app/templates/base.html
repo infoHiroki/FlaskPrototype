@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or 'Video Service' }}</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; }
+        nav { margin-bottom: 1em; }
+        .flash { padding: 1em; margin-bottom: 1em; border-radius: 5px; }
+        .flash.success { background-color: #d4edda; color: #155724; }
+        .flash.danger { background-color: #f8d7da; color: #721c24; }
+        .flash.info { background-color: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('main.index') }}">Home</a> |
+        {% if current_user.is_anonymous %}
+        <a href="{{ url_for('auth.login') }}">Login</a> |
+        <a href="{{ url_for('auth.register') }}">Register</a>
+        {% else %}
+        <a href="{{ url_for('videos.video_list') }}">Videos</a> |
+        <a href="{{ url_for('main.account') }}">My Account</a> |
+        {% if current_user.is_admin %}
+        <a href="{{ url_for('admin.dashboard') }}">Admin</a> |
+        {% endif %}
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+        {% endif %}
+    </nav>
+    <hr>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div>
+        {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

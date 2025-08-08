@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Video Library</h1>
+    {% if not videos %}
+        <p>There are no videos available at the moment. Please check back later.</p>
+    {% else %}
+        <ul>
+            {% for video in videos %}
+                <li>
+                    <a href="{{ url_for('videos.video_detail', video_id=video.id) }}">{{ video.title }}</a>
+                    <p><small>Published on: {{ video.published_at.strftime('%Y-%m-%d') }}</small></p>
+                    <p>{{ video.description or 'No description available.' }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

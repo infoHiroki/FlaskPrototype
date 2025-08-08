@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Subscribe to Our Service</h1>
+    <p>Click the button below to proceed to payment and activate your monthly subscription.</p>
+    <p><strong>Price:</strong> ¥1,980/month</p>
+
+    <form action="{{ url_for('payment.create_checkout_session') }}" method="POST">
+        <button type="submit">Subscribe Now</button>
+    </form>
+{% endblock %}
